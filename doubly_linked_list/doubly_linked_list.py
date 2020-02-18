@@ -94,12 +94,11 @@ class DoublyLinkedList:
         if self.tail:
             self.tail.insert_after(value)
             self.tail = current_tail.next
-            if current_tail.prev:
-                current_tail.prev.next = self.tail
+            self.length += 1
         else:
             self.tail = ListNode(value)
             self.head = self.tail
-        self.length += 1
+            self.length = 1
         pass
 
     """Removes the List's current tail node, making the 
@@ -121,7 +120,9 @@ class DoublyLinkedList:
     def move_to_front(self, node):
         node.delete()
         if self.head:
+            self.head.prev = node
             node.next = self.head
+            self.head = node
         else:
             self.head = node
             self.tail = node
@@ -130,13 +131,57 @@ class DoublyLinkedList:
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
+        if self.head == node:
+            self.head = self.head.next
+        node.delete()
+        if self.tail:
+            self.tail.next = node
+            node.prev = self.tail
+            node.next = None
+            self.tail = node
+        else:
+            self.head = node
+            self.tail = node
         pass
 
     """Removes a node from the list and handles cases where
     the node was the head or the tail"""
     def delete(self, node):
+        if self.head != node and self.tail != node:
+            node.delete()
+            self.length -= 1
+        elif self.length == 1:
+            node.delete()
+            self.head = None
+            self.tail = None
+            self.length -= 1
+        elif self.tail == node:
+            self.remove_from_tail()
+        elif self.head == node:
+            self.remove_from_head()
         pass
         
     """Returns the highest value currently in the list"""
     def get_max(self):
+        print("---")
+        if self.length == 0:
+            return None;
+        elif self.length == 1:
+            return self.head.value
+        else:
+            current_node = self.head
+            current_max = current_node.value
+            print(f"Current node value is {current_max}")
+            for i in range(self.length):
+                print(f"GET MAX: List lengths is {self.length}")
+                print(f"GET MAX: Iteration {i}")
+                print(f"GET MAX: current max is {current_max}")
+                if current_node.next:
+                    current_node = current_node.next
+                    print(f"Current node value is {current_node.value}")
+                    if current_node.value > current_max:
+                        current_max = current_node.value
+            print("---")
+            return current_max
+        print("---")
         pass

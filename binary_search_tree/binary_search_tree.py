@@ -12,20 +12,48 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
+        if value is None:
+            return
+        if self.value is None: # check to see if tree has a root
+            self.value = BinarySearchTree(value) # if there's no root, make this new value the root
+        elif value >= self.value: # passed in value is greater than current node, so move right
+            # ...
+            if self.right is None:
+                self.right = BinarySearchTree(value)
+            else:
+                self.right.insert(value)
+        else: # otherwise, go left
+            # ...
+            if self.left is None:
+                self.left = BinarySearchTree(value)
+            else:
+                self.left.insert(value)
+            
         pass
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
+        # Base cases:
+        # target found or we hit None
+
+        # Recursive case
+        # go down left or right subtree, depending on target
         pass
 
     # Return the maximum value found in the tree
     def get_max(self):
+        # RIGHT as far as you can go
         pass
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
+        # Base case: 
+        # Left is None or Right is None
+
+        # Recursive case:
+        # Go LEFT and RIGHT as long they are not None
         pass
 
     # DAY 2 Project -----------------------

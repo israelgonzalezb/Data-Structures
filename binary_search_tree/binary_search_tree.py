@@ -74,26 +74,58 @@ class BinarySearchTree:
         if self.right:
             self.right.for_each(cb)
             
-
         # Recursive case:
         # Go LEFT and RIGHT as long they are not None
         pass
+
+    
 
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
+        # Left, Root, Right
+
+        # Base Case:
+        # We're at the bottom of the tree
+        # Node is None / Node has no children
+        if node is None:
+            return
+
+        # Recursive case
+        # go left (as far as possible)
+        self.in_order_print(node.left)
+        print(node.value)
+        # go right (as far as possible)
+        self.in_order_print(node.right)
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
+        # set up a QUEUE [nodes to backtrack to]
+        # init with "node"
+
+        # while queue NOT empty
+            # dequeue node
+            # print node.value
+            # enqueue node.left, node.right'
+        
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
+        # set up a stack [node we need to backtrack to]
+        # init with "node"
+
+        # while stack NOT empty
+            # pop node from stack
+            # print value
+            # push node.left, node.right
+        
+        # print
         pass
 
     # STRETCH Goals -------------------------

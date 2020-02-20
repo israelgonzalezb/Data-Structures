@@ -1,3 +1,4 @@
+from doubly_linked_list import ListNode
 from doubly_linked_list import DoublyLinkedList
 
 class LRUCache:
@@ -22,11 +23,14 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
+        print(f"Getting {key}")
         if key in self.storage:
-            value = self.storage[key]
-            self.order.move_to_front(value)
-            return value
+            self.order.move_to_front(self.storage[key])
+            print(f"self.storage is now {self.storage}")
+            print(f"head is {self.order.head.value}, tail is {self.order.tail.value}")
+            return self.storage[key].value
         else:
+            print(f"Something went wrong... key is {key} and self.storage is {self.storage}")
             return None
 
     """
@@ -40,4 +44,35 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
+        # print(f"Setting key {key} with value {value}, storage is {self.storage}")
+        if key in self.storage: # OVERWRITE
+            self.storage[key].value = value
+            self.order.move_to_front(self.storage[key])
+            # print(f"Key is {key}, self.storage[key].value is {self.storage[key].value} and self.storage is now {self.storage}")
+        else: # CREATE NEW KEY
+            # print(f"The size of the cache is {self.size} and limit is {self.limit}")
+            if self.size < self.limit:
+                self.order.add_to_head(value)
+                self.storage[key] = self.order.head
+                self.size += 1
+                # print(f"Key is {key} and self.storage is now {self.storage}")
+
+
+            else: # The cache is full!
+                # we need to remove the item at the tail...
+                # print(f"self.storage keys are {self.storage.keys()}")
+                self.order.remove_from_tail()
+                for item in self.storage:
+                    if self.storage[item] == self.order.tail:
+                        del self.storage[item]
+                        break
+                        
+                #del self.storage[self.order.tail]
+
+                self.order.add_to_head(value)
+                self.storage[key] = self.order.head
+                # self.size += 1 # we wouldn't increment the size, because it's already at the max limit if it hit this condition
+
+                # self.storage[key] = self.order.head.value
+
         pass

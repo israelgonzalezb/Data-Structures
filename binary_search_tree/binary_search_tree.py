@@ -37,15 +37,31 @@ class BinarySearchTree:
     def contains(self, target):
         # Base cases:
         # target found or we hit None
-
+        if self.value == target:
+            print(f"Value of the node and target are the same, value is {self.value}, target is {target}, are they equal? {self.value == target}")
+            return True
         # Recursive case
         # go down left or right subtree, depending on target
+        elif self.value:
+            print(f"Value and target are not the same. self.value is {self.value}, target is {target}")
+            if target > self.value and self.right:
+                return self.right.contains(target)
+            elif target < self.value and self.left:
+                return self.left.contains(target)
+            else:
+                return False
+
+
         pass
 
     # Return the maximum value found in the tree
     def get_max(self):
         # RIGHT as far as you can go
-        pass
+        if self.right:
+            return self.right.get_max()
+        else:
+            return self.value
+        
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach

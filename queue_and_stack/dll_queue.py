@@ -11,10 +11,12 @@ class Queue:
         self.storage = DoublyLinkedList()
     # We'll make the head the front of the queue, so things will be popped from the head
     def enqueue(self, value):
+        self.size += 1
         self.storage.add_to_tail(value)
         pass
 
     def dequeue(self):
+        self.size -= 1
         if self.len() > 0:
             temp_head = self.storage.head
             self.storage.remove_from_head()

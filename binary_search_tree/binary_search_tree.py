@@ -68,6 +68,12 @@ class BinarySearchTree:
     def for_each(self, cb):
         # Base case: 
         # Left is None or Right is None
+        cb(self.value)
+        if self.left:
+            self.left.for_each(cb)
+        if self.right:
+            self.right.for_each(cb)
+            
 
         # Recursive case:
         # Go LEFT and RIGHT as long they are not None

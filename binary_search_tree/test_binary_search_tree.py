@@ -36,7 +36,6 @@ class BinarySearchTreeTests(unittest.TestCase):
         self.bst.insert(300)
         self.bst.insert(3)
         self.assertEqual(self.bst.get_max(), 300)
-    """
     def test_for_each(self):
         arr = []
         cb = lambda x: arr.append(x)
@@ -62,6 +61,7 @@ class BinarySearchTreeTests(unittest.TestCase):
         self.assertTrue(v4 in arr)
         self.assertTrue(v5 in arr)
 
+    """
     def test_print_traversals(self):
         # WARNING:  Tests are for Print()
         # Debug calls to Print() in functions will cause failure
